@@ -14,7 +14,9 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::with('roles')->latest();
+        $query = User::with(['roles', 'defaultShift'])->whereDoesntHave('roles', function($q) {
+            $q->where('name', 'Admin');
+        })->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -36,8 +38,25 @@ class UserController extends Controller
         $users = $query->get();
         $roles = Role::all();
         $jabatans = User::whereNotNull('jabatan')->where('jabatan', '!=', '')->distinct()->pluck('jabatan');
+        $shifts = \App\Models\Shift::all();
 
-        return view('users.index', compact('users', 'roles', 'jabatans'));
+        return view('users.index', compact('users', 'roles', 'jabatans', 'shifts'));
+    }
+
+    public function updateShift(Request $request, User $user)
+    {
+        $request->validate([
+            'default_shift_id' => ['nullable', 'exists:shifts,id'],
+        ]);
+
+        $user->update([
+            'default_shift_id' => $request->default_shift_id
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Default Shift berhasil diperbarui'
+        ]);
     }
 
     public function create()
@@ -152,7 +171,7 @@ class UserController extends Controller
      */
     private function syncUserToDevices($pin, $name, $role)
     {
-        $devices = Device::where('is_active', true)->get();
+        $devices = Device::where('status', true)->get();
         foreach ($devices as $device) {
             $zk = new ZktecoService($device->ip_address, $device->port);
             $zk->pushUser($pin, $name, $role);
@@ -164,7 +183,7 @@ class UserController extends Controller
      */
     private function removeUserFromDevices($pin)
     {
-        $devices = Device::where('is_active', true)->get();
+        $devices = Device::where('status', true)->get();
         foreach ($devices as $device) {
             $zk = new ZktecoService($device->ip_address, $device->port);
             $zk->removeUser($pin);

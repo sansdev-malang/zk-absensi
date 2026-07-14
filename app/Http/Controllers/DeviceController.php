@@ -81,4 +81,16 @@ class DeviceController extends Controller
 
         return redirect()->route('devices.index')->with('success', 'Perangkat ZKTeco berhasil dihapus.');
     }
+
+    public function clearLogs(Device $device)
+    {
+        $zkteco = new \App\Services\ZktecoService($device->ip_address, $device->port);
+        $result = $zkteco->clearAttendance();
+
+        if ($result) {
+            return redirect()->route('devices.index')->with('success', "Seluruh log absensi di mesin {$device->nama_mesin} berhasil dibersihkan (Kosong).");
+        } else {
+            return redirect()->route('devices.index')->with('error', "Gagal membersihkan log di mesin {$device->nama_mesin}. Pastikan mesin dalam keadaan aktif dan terhubung.");
+        }
+    }
 }

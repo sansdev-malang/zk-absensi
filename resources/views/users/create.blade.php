@@ -64,19 +64,8 @@
                             <input type="text" name="uid" id="uid" value="{{ old('uid') }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Biarkan kosong jika belum terdaftar di mesin">
                         </div>
 
-                        <!-- Role -->
-                        <div class="md:col-span-1">
-                            <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role Sistem <span class="text-red-500">*</span></label>
-                            <select name="role" id="role" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <option value="" disabled selected>Pilih Role</option>
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
-                                        {{ $role->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <p class="mt-1 text-xs text-gray-500">Role 'User' adalah untuk karyawan biasa.</p>
-                        </div>
+                        <!-- Hidden Role -->
+                        <input type="hidden" name="role" value="User">
                         
                         <!-- Shift Default -->
                         <div class="md:col-span-1">

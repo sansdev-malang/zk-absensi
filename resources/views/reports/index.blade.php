@@ -1,40 +1,94 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            {{ __('Rekap Harian & Bonus') }}
+            {{ __('Laporan Absensi & Bonus') }}
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
+            <!-- Navigation Tabs -->
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex gap-6" aria-label="Tabs">
+                    <a href="{{ route('reports.index') }}" class="border-blue-500 text-blue-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        Rincian Harian
+                    </a>
+                    <a href="{{ route('reports.summary') }}" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                        Rekap Karyawan (Payroll)
+                    </a>
+                </nav>
+            </div>
+
             <!-- Tutorial / Panduan -->
             <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 shadow-sm flex items-start gap-4">
                 <div class="bg-indigo-100 p-2 rounded-lg text-indigo-600 shrink-0">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="text-indigo-900 font-bold mb-1">Panduan: Laporan Harian</h4>
-                    <p class="text-indigo-800 text-sm mb-2">Halaman ini menampilkan <strong>Rekap Final</strong> hasil kalkulasi otomatis sistem. Di sini Anda bisa melihat jam kerja riil dan total uang bonus kehadiran masing-masing karyawan.</p>
-                    <ul class="list-disc list-inside text-indigo-800 text-sm space-y-1">
-                        <li>Gunakan filter tanggal untuk melihat periode absensi tertentu.</li>
-                        <li>Uang bonus yang tampil di sini sudah sesuai dengan <strong>Skema Bonus</strong> yang ditautkan pada shift karyawan tersebut.</li>
-                    </ul>
+                    <h4 class="text-indigo-900 font-bold mb-1">Panduan: Rincian Harian</h4>
+                    <p class="text-indigo-800 text-sm mb-2">Halaman ini menampilkan <strong>Rincian Absensi per Hari</strong>. Untuk melihat total gaji/bonus per karyawan, silakan klik tab <strong>Rekap Karyawan (Payroll)</strong> di atas.</p>
+                </div>
+            </div>
+
+            <!-- Summary Widgets -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Total Bonus -->
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-sm p-6 text-white flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-xl">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-green-100 text-sm font-medium uppercase tracking-wider mb-1">Total Bonus (Periode Ini)</p>
+                        <h3 class="text-3xl font-bold">Rp {{ number_format($totalBonus ?? 0, 0, ',', '.') }}</h3>
+                    </div>
+                </div>
+
+                <!-- Total Terlambat -->
+                <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-sm p-6 text-white flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-xl">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-red-100 text-sm font-medium uppercase tracking-wider mb-1">Total Keterlambatan</p>
+                        <h3 class="text-3xl font-bold">{{ number_format($totalTerlambat ?? 0, 0, ',', '.') }} Menit</h3>
+                    </div>
                 </div>
             </div>
 
             <!-- Filter Card & Recalculate -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col lg:flex-row justify-between gap-6">
                 <!-- Form Filter -->
-                <form method="GET" action="{{ route('reports.index') }}" class="flex flex-col sm:flex-row items-end gap-4 w-full lg:w-auto">
+                <form method="GET" action="{{ route('reports.index') }}" class="flex flex-col sm:flex-row items-end gap-4 w-full lg:w-auto flex-wrap">
+                    <!-- Dropdown Karyawan -->
+                    @hasanyrole('Admin|HR|Supervisor')
                     <div>
-                        <label for="start_date" class="block text-sm font-medium text-gray-700 mb-1">Dari Tanggal</label>
-                        <input type="date" name="start_date" id="start_date" value="{{ request('start_date', now()->startOfMonth()->toDateString()) }}" class="rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm w-full">
+                        <label for="user_id" class="block text-sm font-medium text-gray-700 mb-1">Filter Karyawan</label>
+                        <select name="user_id" id="user_id" class="rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm w-full lg:w-48 bg-white">
+                            <option value="">Semua Karyawan</option>
+                            @foreach($usersList as $u)
+                                <option value="{{ $u->id }}" {{ request('user_id') == $u->id ? 'selected' : '' }}>
+                                    {{ $u->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+                    @endhasanyrole
+
+                    <!-- Dropdown Pintasan Periode -->
                     <div>
-                        <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">Sampai Tanggal</label>
-                        <input type="date" name="end_date" id="end_date" value="{{ request('end_date', now()->endOfMonth()->toDateString()) }}" class="rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm w-full">
+                        <label for="periode_pintasan" class="block text-sm font-medium text-gray-700 mb-1">Periode</label>
+                        <select id="periode_pintasan" onchange="setPeriodeDates(this)" class="rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm w-full lg:w-48 bg-white">
+                            @foreach($predefinedPeriods as $period)
+                                <option value="{{ $period['start'] }}|{{ $period['end'] }}" {{ $startDate == $period['start'] && $endDate == $period['end'] ? 'selected' : '' }}>
+                                    {{ $period['label'] }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+
+                    <input type="hidden" name="start_date" id="start_date" value="{{ $startDate }}">
+                    <input type="hidden" name="end_date" id="end_date" value="{{ $endDate }}">
                     <div class="flex gap-2 w-full sm:w-auto mt-4 sm:mt-0">
                         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-medium shadow-sm transition w-full sm:w-auto">
                             Terapkan
@@ -43,6 +97,7 @@
                     </div>
                 </form>
 
+                @hasanyrole('Admin|HR|Supervisor')
                 <!-- Form Kalkulasi Ulang -->
                 <div class="border-t lg:border-t-0 lg:border-l border-gray-100 pt-4 lg:pt-0 lg:pl-6 flex items-end">
                     <form method="POST" action="{{ route('reports.recalculate') }}" id="recalculateForm" class="w-full">
@@ -55,6 +110,7 @@
                         </button>
                     </form>
                 </div>
+                @endhasanyrole
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-gray-100">
@@ -171,6 +227,14 @@
         function showRecalculateOverlay() {
             document.getElementById('loadingOverlay').classList.remove('hidden');
             document.getElementById('loadingOverlay').classList.add('flex');
+        }
+
+        function setPeriodeDates(select) {
+            if (select.value) {
+                const dates = select.value.split('|');
+                document.getElementById('start_date').value = dates[0];
+                document.getElementById('end_date').value = dates[1];
+            }
         }
     </script>
 </x-app-layout>

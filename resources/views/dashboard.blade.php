@@ -76,11 +76,16 @@
                         <p class="text-sm text-gray-400 mt-1">Lakukan sinkronisasi dengan mesin ZKTeco untuk memperbarui data.</p>
                         
                         @hasanyrole('Admin|HR|Supervisor')
-                        <form action="{{ route('zkteco.sync') }}" method="POST" class="mt-6" onsubmit="document.getElementById('sync-overlay').classList.remove('hidden')">
+                        <form action="{{ route('zkteco.sync') }}" method="POST" class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3" onsubmit="document.getElementById('sync-overlay').classList.remove('hidden')">
                             @csrf
+                            <div class="flex items-center gap-2">
+                                <input type="date" name="start_date" class="border-gray-200 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" title="Tanggal Awal">
+                                <span class="text-gray-500 text-sm">s/d</span>
+                                <input type="date" name="end_date" class="border-gray-200 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" title="Tanggal Akhir">
+                            </div>
                             <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-sm shadow-blue-500/30">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                Sinkronisasi Sekarang
+                                Tarik Data Absensi
                             </button>
                         </form>
                         

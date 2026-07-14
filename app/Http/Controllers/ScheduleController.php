@@ -8,34 +8,49 @@ use App\Models\Shift;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use App\Services\PayrollPeriodService;
 
 class ScheduleController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, PayrollPeriodService $periodService)
     {
-        $month = $request->get('month', date('m'));
-        $year = $request->get('year', date('Y'));
+        [$defaultStart, $defaultEnd] = $periodService->calculatePeriod(Carbon::now());
+        
+        $startDate = $request->input('start_date', $defaultStart);
+        $endDate = $request->input('end_date', $defaultEnd);
+
+        // Prepare predefined periods for dropdown (last 3 periods)
+        $predefinedPeriods = $periodService->getPredefinedPeriods(3);
         
         $schedules = UserShift::with(['user', 'shift'])
-            ->whereMonth('tanggal', $month)
-            ->whereYear('tanggal', $year)
-            ->orderBy('tanggal', 'desc')
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->orderBy('tanggal', 'asc')
             ->get();
             
-        return view('schedules.index', compact('schedules', 'month', 'year'));
+        // Group by Shift ID, then by User ID
+        $groupedSchedules = $schedules->groupBy('shift_id')->map(function ($shifts) {
+            return $shifts->groupBy('user_id');
+        });
+
+        return view('schedules.index', compact('groupedSchedules', 'startDate', 'endDate', 'predefinedPeriods'));
     }
 
-    public function create()
+    public function create(PayrollPeriodService $periodService)
     {
-        $users = User::all();
+        $users = User::whereDoesntHave('roles', function($q) {
+            $q->where('name', 'Admin');
+        })->get();
         $shifts = Shift::all();
-        return view('schedules.create', compact('users', 'shifts'));
+        [$defaultStart, $defaultEnd] = $periodService->calculatePeriod(Carbon::now());
+        
+        return view('schedules.create', compact('users', 'shifts', 'defaultStart', 'defaultEnd'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'user_ids' => 'required|array|min:1',
+            'user_ids.*' => 'exists:users,id',
             'shift_id' => 'required|exists:shifts,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
@@ -43,21 +58,65 @@ class ScheduleController extends Controller
 
         $period = CarbonPeriod::create($request->start_date, $request->end_date);
         
-        $count = 0;
-        foreach ($period as $date) {
-            UserShift::updateOrCreate(
-                [
-                    'user_id' => $request->user_id,
-                    'tanggal' => $date->format('Y-m-d'),
-                ],
-                [
-                    'shift_id' => $request->shift_id,
-                ]
-            );
-            $count++;
+        $countDays = 0;
+        $countUsers = count($request->user_ids);
+
+        foreach ($request->user_ids as $userId) {
+            $days = 0;
+            foreach ($period as $date) {
+                UserShift::updateOrCreate(
+                    [
+                        'user_id' => $userId,
+                        'tanggal' => $date->format('Y-m-d'),
+                    ],
+                    [
+                        'shift_id' => $request->shift_id,
+                    ]
+                );
+                $days++;
+            }
+            $countDays = $days; // same for all users
         }
 
-        return redirect()->route('schedules.index')->with('success', "Berhasil menambahkan $count hari jadwal.");
+        return redirect()->route('schedules.index')->with('success', "Berhasil menugaskan $countUsers karyawan untuk $countDays hari jadwal.");
+    }
+
+    public function autoGenerate(PayrollPeriodService $periodService)
+    {
+        // Get current period range
+        [$startDate, $endDate] = $periodService->calculatePeriod(Carbon::now());
+        
+        // Find users who are NOT admin and have a default_shift_id
+        $users = User::whereDoesntHave('roles', function($q) {
+            $q->where('name', 'Admin');
+        })->whereNotNull('default_shift_id')->get();
+
+        if ($users->isEmpty()) {
+            return redirect()->route('schedules.index')->with('error', 'Tidak ada karyawan yang memiliki Default Shift untuk di-generate secara otomatis.');
+        }
+
+        $period = CarbonPeriod::create($startDate, $endDate);
+        $countUsers = 0;
+
+        foreach ($users as $user) {
+            foreach ($period as $date) {
+                UserShift::updateOrCreate(
+                    [
+                        'user_id' => $user->id,
+                        'tanggal' => $date->format('Y-m-d'),
+                    ],
+                    [
+                        'shift_id' => $user->default_shift_id,
+                    ]
+                );
+            }
+            $countUsers++;
+        }
+
+        $formattedStart = Carbon::parse($startDate)->format('d M Y');
+        $formattedEnd = Carbon::parse($endDate)->format('d M Y');
+
+        return redirect()->route('schedules.index')->with('success', "Generate Otomatis Berhasil! Jadwal untuk $countUsers karyawan telah dibuat dari tanggal $formattedStart hingga $formattedEnd.");
     }
 
     public function destroy(UserShift $schedule)

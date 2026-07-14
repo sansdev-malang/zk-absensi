@@ -15,9 +15,9 @@ class ZktecoService
     {
         $this->ip = $ip;
         $this->port = $port;
-        // Menggunakan protokol TCP agar tidak nyangkut (hang)
+        // Menggunakan protokol TCP.
         try {
-            $this->zk = new ZKTeco($ip, $port, protocol: 'tcp');
+            $this->zk = new ZKTeco($ip, $port, false, 25, 0, 'tcp');
         } catch (\Throwable $e) {
             $this->zk = null;
         }
@@ -52,14 +52,76 @@ class ZktecoService
     {
         try {
             if ($this->connect()) {
-                $attendance = $this->zk->getAttendances();
+                // Gunakan reflection untuk mendapatkan inner ZKTeco client
+                $zkProp = (new \ReflectionClass($this->zk))->getProperty('_zkclient');
+                
+                \Mithun\PhpZkteco\Libs\Services\Ping::run($this->zk);
+                $command = \Mithun\PhpZkteco\Libs\Services\Util::CMD_ATT_LOG_RRQ;
+                
+                $session = $this->zk->_command($command, '', \Mithun\PhpZkteco\Libs\Services\Util::COMMAND_TYPE_DATA);
+                if ($session === false) {
+                    $this->disconnect();
+                    return [];
+                }
+                
+                $attData = \Mithun\PhpZkteco\Libs\Services\Util::recData($this->zk);
+                $attendance = [];
+                
+                if (!empty($attData)) {
+                    // Mesin ini menggunakan format TFT 40-byte records.
+                    // Payload dari CMD_DATA diawali dengan 8 byte ZK header + 4 byte ukuran (size).
+                    // Kita akan buang 12 byte pertama.
+                    $attData = substr($attData, 12);
+                    
+                    while (strlen($attData) >= 40) {
+                        $record = substr($attData, 0, 40);
+                        
+                        $userIdStr = substr($record, 2, 24);
+                        $userId = trim(str_replace(chr(0), '', $userIdStr));
+                        
+                        $timestampBytes = substr($record, 27, 4);
+                        $t = unpack('V', $timestampBytes)[1];
+                        
+                        $stateByte = substr($record, 31, 1);
+                        $state = ord($stateByte);
+                        
+                        // ZKTeco epoch starts at 2000-01-01 (t=0)
+                        if ($t > 0 && !empty($userId)) {
+                            $timestamp = \Mithun\PhpZkteco\Libs\Services\Util::decodeTime($t);
+                            $attendance[] = [
+                                'uid' => $userId, // UID auto increment mesin (tidak dipakai library default, kita isi sama dgn user_id)
+                                'user_id' => $userId,
+                                'state' => $state,
+                                'record_time' => $timestamp,
+                                'type' => 0,
+                            ];
+                        }
+                        
+                        $attData = substr($attData, 40);
+                    }
+                }
+                
                 $this->disconnect();
                 return $attendance;
             }
-        } catch (Exception $e) {
-            // Log error
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('ZKTeco parse error: ' . $e->getMessage());
         }
         return [];
+    }
+
+    public function clearAttendance()
+    {
+        try {
+            if ($this->connect()) {
+                $result = $this->zk->clearAttendance();
+                $this->disconnect();
+                return $result;
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('ZKTeco clearAttendance error: ' . $e->getMessage());
+        }
+        return false;
     }
 
     public function getUsers()

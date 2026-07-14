@@ -1,9 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            {{ __('Manajemen Karyawan') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+                {{ __('Data Karyawan & Mapping Mesin') }}
+            </h2>
+        </div>
     </x-slot>
+
+    @php
+        $shiftColors = [
+            'bg-blue-50 text-blue-700 border-blue-200 focus:border-blue-500 focus:ring-blue-500',
+            'bg-emerald-50 text-emerald-700 border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500',
+            'bg-purple-50 text-purple-700 border-purple-200 focus:border-purple-500 focus:ring-purple-500',
+            'bg-amber-50 text-amber-700 border-amber-200 focus:border-amber-500 focus:ring-amber-500',
+            'bg-rose-50 text-rose-700 border-rose-200 focus:border-rose-500 focus:ring-rose-500',
+            'bg-cyan-50 text-cyan-700 border-cyan-200 focus:border-cyan-500 focus:ring-cyan-500',
+        ];
+        $shiftColorMap = [];
+        foreach($shifts as $index => $shift) {
+            $shiftColorMap[$shift->id] = $shiftColors[$index % count($shiftColors)];
+        }
+    @endphp
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -79,22 +96,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        
-                        <div class="w-full md:w-48">
-                            <label for="role" class="block text-xs font-medium text-gray-500 mb-1">Filter Role</label>
-                            <select name="role" id="role" class="block w-full sm:text-sm border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Semua Role</option>
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->name }}" {{ request('role') == $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
                         <div class="flex gap-2 w-full md:w-auto">
                             <button type="submit" class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-medium transition shadow-sm w-full md:w-auto">
                                 Filter
                             </button>
-                            @if(request()->anyFilled(['search', 'jabatan', 'role']))
+                            @if(request()->anyFilled(['search', 'jabatan']))
                                 <a href="{{ route('users.index') }}" class="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition shadow-sm w-full md:w-auto text-center">
                                     Reset
                                 </a>
@@ -111,7 +118,7 @@
                                 <th class="px-6 py-4 font-medium">Nama / Email</th>
                                 <th class="px-6 py-4 font-medium">Jabatan</th>
                                 <th class="px-6 py-4 font-medium">UID ZKTeco</th>
-                                <th class="px-6 py-4 font-medium">Role</th>
+                                <th class="px-6 py-4 font-medium">Default Shift</th>
                                 <th class="px-6 py-4 font-medium text-right">Aksi</th>
                             </tr>
                         </thead>
@@ -132,7 +139,16 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-gray-600">{{ $user->jabatan ?? '-' }}</td>
+                                    <td class="px-6 py-4">
+                                        @if($user->jabatan)
+                                            <span class="text-gray-600">{{ $user->jabatan }}</span>
+                                        @else
+                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-red-50 text-red-700 border border-red-200">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                                Belum Diatur
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-4">
                                         @if($user->uid)
                                             <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-gray-100 text-gray-800 border border-gray-200">
@@ -144,22 +160,21 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         @php
-                                            $roleName = $user->roles->first()->name ?? 'None';
-                                            $roleColor = match($roleName) {
-                                                'Admin' => 'bg-purple-100 text-purple-700',
-                                                'HR' => 'bg-blue-100 text-blue-700',
-                                                'Supervisor' => 'bg-orange-100 text-orange-700',
-                                                default => 'bg-gray-100 text-gray-700'
-                                            };
+                                            $currentBg = $user->default_shift_id && isset($shiftColorMap[$user->default_shift_id]) ? $shiftColorMap[$user->default_shift_id] : 'bg-gray-50 text-gray-500 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500';
                                         @endphp
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium {{ $roleColor }}">
-                                            {{ $roleName }}
-                                        </span>
+                                        <select class="shift-select block w-full rounded-md border shadow-sm sm:text-sm font-medium transition-colors cursor-pointer {{ $currentBg }}" data-user-id="{{ $user->id }}">
+                                            <option value="" class="bg-white text-gray-700 font-normal">(Via Roster)</option>
+                                            @foreach($shifts as $shift)
+                                                <option value="{{ $shift->id }}" class="bg-white text-gray-700 font-normal" {{ $user->default_shift_id == $shift->id ? 'selected' : '' }}>
+                                                    {{ $shift->nama }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td class="px-6 py-4 text-right space-x-3">
                                         <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-900 font-medium text-sm transition">Edit</a>
                                         
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data karyawan ini beserta data sidik jarinya di mesin?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 font-medium text-sm transition">Hapus</button>
@@ -168,12 +183,12 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                                    <td colspan="6" class="px-6 py-12 text-center text-gray-500">
                                         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4">
                                             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                         </div>
-                                        <p class="font-medium text-gray-900 mb-1">Belum ada karyawan</p>
-                                        <p class="text-sm">Silakan daftarkan karyawan pertama Anda.</p>
+                                        <h3 class="text-lg font-medium text-gray-900 mb-1">Belum ada data Karyawan</h3>
+                                        <p class="text-gray-500 text-sm mb-4">Klik tombol Tarik Karyawan di atas untuk sinkronisasi data dari mesin.</p>
                                     </td>
                                 </tr>
                             @endforelse
@@ -185,21 +200,103 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="fixed inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm hidden z-50 flex-col items-center justify-center">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center max-w-sm w-full mx-4 transform transition-all">
-            <svg class="animate-spin -ml-1 mr-3 h-12 w-12 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <div id="loadingOverlay" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-6 flex items-center gap-4 shadow-xl">
+            <svg class="animate-spin h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Sinkronisasi Karyawan...</h3>
-            <p class="text-gray-500 text-center text-sm">Menarik data pengguna dari mesin fisik ZKTeco. Mohon jangan tutup halaman ini.</p>
+            <span class="text-gray-700 font-medium">Memproses data dari mesin...</span>
         </div>
     </div>
 
     <script>
-        function showLoadingOverlay() {
-            document.getElementById('loadingOverlay').classList.remove('hidden');
+        function showLoading() {
             document.getElementById('loadingOverlay').classList.add('flex');
         }
+    </script>
+    <!-- Toast Notification for AJAX -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-full opacity-0 transition-all duration-300 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 z-50">
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-message" class="text-sm font-medium">Tersimpan</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selects = document.querySelectorAll('.shift-select');
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const shiftColorMap = @json($shiftColorMap);
+
+            function showToast(message, isError = false) {
+                toastMsg.textContent = message;
+                if(isError) {
+                    toast.classList.replace('bg-gray-900', 'bg-red-600');
+                    toast.querySelector('svg').outerHTML = '<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
+                } else {
+                    toast.classList.replace('bg-red-600', 'bg-gray-900');
+                    toast.querySelector('svg').outerHTML = '<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                }
+
+                toast.classList.remove('translate-y-full', 'opacity-0');
+                
+                setTimeout(() => {
+                    toast.classList.add('translate-y-full', 'opacity-0');
+                }, 3000);
+            }
+
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    const userId = this.getAttribute('data-user-id');
+                    const shiftId = this.value;
+                    
+                    this.style.opacity = '0.5';
+                    this.disabled = true;
+
+                    fetch(`/users/${userId}/update-shift`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            default_shift_id: shiftId === '' ? null : shiftId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        this.style.opacity = '1';
+                        this.disabled = false;
+                        
+                        if(data.success) {
+                            showToast(data.message);
+                            
+                            // Update Color dynamically
+                            this.className = "shift-select block w-full rounded-md border shadow-sm sm:text-sm font-medium transition-colors cursor-pointer";
+                            const newColorClass = shiftId ? (shiftColorMap[shiftId] || 'bg-gray-50 text-gray-700 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500') : 'bg-gray-50 text-gray-500 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500';
+                            
+                            // Using split to add multiple classes properly
+                            newColorClass.split(' ').forEach(cls => {
+                                if(cls) this.classList.add(cls);
+                            });
+
+                            // Add blink effect
+                            this.classList.add('ring-2', 'ring-green-400');
+                            setTimeout(() => {
+                                this.classList.remove('ring-2', 'ring-green-400');
+                            }, 1000);
+                        } else {
+                            showToast('Gagal menyimpan perubahan.', true);
+                        }
+                    })
+                    .catch(error => {
+                        this.style.opacity = '1';
+                        this.disabled = false;
+                        showToast('Terjadi kesalahan jaringan.', true);
+                    });
+                });
+            });
+        });
     </script>
 </x-app-layout>

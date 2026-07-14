@@ -31,5 +31,19 @@ class RolesAndUsersSeeder extends Seeder
         if (!$admin->hasRole('Admin')) {
             $admin->assignRole('Admin');
         }
+
+        // Create 10 Dummy Users (Commented out for real machine testing)
+        // for ($i = 1; $i <= 10; $i++) {
+        //     $user = \App\Models\User::firstOrCreate(
+        //         ['email' => "karyawan{$i}@example.com"],
+        //         [
+        //             'name' => "Karyawan {$i}",
+        //             'password' => \Illuminate\Support\Facades\Hash::make('password'),
+        //         ]
+        //     );
+        //     if (!$user->hasRole('User')) {
+        //         $user->assignRole('User');
+        //     }
+        // }
     }
 }

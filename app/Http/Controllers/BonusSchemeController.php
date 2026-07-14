@@ -39,6 +39,11 @@ class BonusSchemeController extends Controller
         return view('bonus-schemes.show', compact('bonusScheme'));
     }
 
+    public function edit(BonusScheme $bonusScheme)
+    {
+        return view('bonus-schemes.edit', compact('bonusScheme'));
+    }
+
     public function update(Request $request, BonusScheme $bonusScheme)
     {
         $request->validate([

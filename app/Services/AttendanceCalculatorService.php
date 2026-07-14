@@ -18,7 +18,10 @@ class AttendanceCalculatorService
      */
     public function calculateAllForDate(Carbon $date)
     {
-        $users = User::all();
+        $users = User::whereDoesntHave('roles', function($q) {
+            $q->where('name', 'Admin');
+        })->get();
+        
         foreach ($users as $user) {
             $this->calculateUserDaily($user, $date);
         }

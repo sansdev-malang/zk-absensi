@@ -29,16 +29,32 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- User -->
+                        <!-- Users (Checkboxes) -->
                         <div class="md:col-span-2">
-                            <label for="user_id" class="block text-sm font-medium text-gray-700 mb-1">Karyawan / Satpam <span class="text-red-500">*</span></label>
-                            <select name="user_id" id="user_id" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <option value="" disabled selected>Pilih Karyawan</option>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Karyawan / Satpam <span class="text-red-500">*</span></label>
+                            
+                            <!-- Search & Select All Tools -->
+                            <div class="flex items-center gap-4 mb-3 pb-3 border-b border-gray-100">
+                                <input type="text" id="searchUser" placeholder="Cari nama atau jabatan..." class="w-full text-sm rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <label class="flex items-center gap-2 cursor-pointer whitespace-nowrap text-sm font-medium text-gray-700 bg-gray-50 px-3 py-2 rounded-lg border border-gray-200 hover:bg-gray-100">
+                                    <input type="checkbox" id="selectAll" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                    Pilih Semua
+                                </label>
+                            </div>
+
+                            <!-- Scrollable Checkbox List -->
+                            <div class="max-h-60 overflow-y-auto border border-gray-200 rounded-lg bg-gray-50 p-2 space-y-1" id="userList">
                                 @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }} - {{ $user->jabatan ?? 'No Job Title' }}
-                                    </option>
+                                    <label class="user-item flex items-center p-2 hover:bg-white rounded cursor-pointer transition">
+                                        <input type="checkbox" name="user_ids[]" value="{{ $user->id }}" class="user-checkbox rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 mr-3">
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900 user-name">{{ $user->name }}</div>
+                                            <div class="text-xs text-gray-500 user-jabatan">{{ $user->jabatan ?? 'No Job Title' }}</div>
+                                        </div>
+                                    </label>
                                 @endforeach
-                            </select>
+                            </div>
+                            <p class="mt-1 text-xs text-gray-500">Centang karyawan yang akan ditugaskan ke jadwal ini.</p>
                         </div>
 
                         <!-- Shift -->
@@ -57,13 +73,13 @@
                         <!-- Start Date -->
                         <div>
                             <label for="start_date" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Mulai <span class="text-red-500">*</span></label>
-                            <input type="date" name="start_date" id="start_date" value="{{ old('start_date', date('Y-m-d')) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $defaultStart) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
                         
                         <!-- End Date -->
                         <div>
                             <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Selesai <span class="text-red-500">*</span></label>
-                            <input type="date" name="end_date" id="end_date" value="{{ old('end_date', date('Y-m-d')) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $defaultEnd) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                             <p class="mt-1 text-xs text-gray-500">Jika hanya untuk 1 hari, samakan dengan Tanggal Mulai.</p>
                         </div>
                     </div>
@@ -83,4 +99,54 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectAll = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.user-checkbox');
+            const searchInput = document.getElementById('searchUser');
+            const userItems = document.querySelectorAll('.user-item');
+
+            // Select All functionality
+            selectAll.addEventListener('change', function() {
+                checkboxes.forEach(cb => {
+                    // Only check visible items
+                    const item = cb.closest('.user-item');
+                    if(item.style.display !== 'none') {
+                        cb.checked = this.checked;
+                    }
+                });
+            });
+
+            // Update Select All state when individual checkboxes change
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', function() {
+                    const allVisible = Array.from(checkboxes).filter(c => c.closest('.user-item').style.display !== 'none');
+                    const allChecked = allVisible.every(c => c.checked);
+                    const someChecked = allVisible.some(c => c.checked);
+                    
+                    selectAll.checked = allChecked && allVisible.length > 0;
+                    selectAll.indeterminate = someChecked && !allChecked;
+                });
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const term = this.value.toLowerCase();
+                userItems.forEach(item => {
+                    const name = item.querySelector('.user-name').textContent.toLowerCase();
+                    const jabatan = item.querySelector('.user-jabatan').textContent.toLowerCase();
+                    
+                    if(name.includes(term) || jabatan.includes(term)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                        item.querySelector('.user-checkbox').checked = false; // uncheck if hidden
+                    }
+                });
+                // Reset select all
+                selectAll.checked = false;
+                selectAll.indeterminate = false;
+            });
+        });
+    </script>
 </x-app-layout>

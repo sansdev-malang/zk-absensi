@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class ZktecoController extends Controller
 {
-    public function syncAttendance(AttendanceCalculatorService $calculator)
+    public function syncAttendance(Request $request, AttendanceCalculatorService $calculator)
     {
         // Menghindari Maximum execution time of 30 seconds exceeded
         set_time_limit(0);
@@ -44,6 +44,13 @@ class ZktecoController extends Controller
                         try {
                             $waktu = Carbon::parse($log['record_time']);
                             $dateStr = $waktu->toDateString();
+                            
+                            if ($request->filled('start_date') && $dateStr < $request->start_date) {
+                                continue;
+                            }
+                            if ($request->filled('end_date') && $dateStr > $request->end_date) {
+                                continue;
+                            }
                             
                             $state = $log['state'] ?? '0';
                             
@@ -76,22 +83,12 @@ class ZktecoController extends Controller
             }
         }
 
-        // Jalankan Kalkulator hanya untuk User dan Tanggal yang baru saja disinkron
-        foreach ($affectedCalculations as $userId => $dates) {
-            $user = User::find($userId);
-            if ($user) {
-                foreach (array_keys($dates) as $dateStr) {
-                    $calculator->calculateUserDaily($user, Carbon::parse($dateStr));
-                }
-            }
-        }
-
         if (count($failedDevices) > 0) {
             $failedMsg = implode(', ', $failedDevices);
             return redirect()->back()->with('warning', "Sinkronisasi selesai. Berhasil menarik $totalSynced data baru. Namun gagal terhubung ke: {$failedMsg}");
         }
 
-        return redirect()->back()->with('success', "Sinkronisasi sukses! Berhasil menarik $totalSynced data absensi baru beserta kalkulasi bonusnya.");
+        return redirect()->back()->with('success', "Sinkronisasi sukses! Berhasil menarik $totalSynced data absensi baru.");
     }
 
     public function syncUsers()

@@ -91,6 +91,11 @@
                                     <td class="px-6 py-4 text-right space-x-3">
                                         <a href="{{ route('devices.edit', $device->id) }}" class="text-blue-600 hover:text-blue-900 font-medium text-sm transition">Edit</a>
                                         
+                                        <form action="{{ route('devices.clear-logs', $device->id) }}" method="POST" class="inline-block" onsubmit="return confirm('PERINGATAN KERAS!\n\nApakah Anda benar-benar yakin ingin MENGHAPUS SELURUH LOG ABSENSI secara permanen dari dalam memori mesin fisik ZKTeco ini?\n\nProses ini tidak dapat dibatalkan!');">
+                                            @csrf
+                                            <button type="submit" class="text-orange-600 hover:text-orange-900 font-medium text-sm transition">Bersihkan Log Mesin</button>
+                                        </form>
+
                                         <form action="{{ route('devices.destroy', $device->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus perangkat ini?');">
                                             @csrf
                                             @method('DELETE')

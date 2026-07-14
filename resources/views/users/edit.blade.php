@@ -53,17 +53,8 @@
                             <input type="text" name="uid" id="uid" value="{{ old('uid', $user->uid) }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
 
-                        <!-- Role -->
-                        <div class="md:col-span-1">
-                            <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role Sistem <span class="text-red-500">*</span></label>
-                            <select name="role" id="role" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->name }}" {{ (old('role', $user->roles->first()->name ?? '') == $role->name) ? 'selected' : '' }}>
-                                        {{ $role->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <!-- Hidden Role -->
+                        <input type="hidden" name="role" value="{{ $user->roles->first()->name ?? 'User' }}">
                         
                         <!-- Shift Default -->
                         <div class="md:col-span-1">
