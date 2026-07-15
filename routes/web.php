@@ -22,6 +22,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('devices', DeviceController::class);
     Route::post('devices/{device}/clear-logs', [DeviceController::class, 'clearLogs'])->name('devices.clear-logs');
 
+    if (app()->environment('local')) {
+        Route::post('zkteco/sync-attendance', [ZktecoController::class, 'syncAttendance'])->name('zkteco.sync-attendance');
+        Route::post('zkteco/sync-users', [ZktecoController::class, 'syncUsers'])->name('zkteco.sync-users');
+    }
+
     Route::resource('shifts', \App\Http\Controllers\ShiftController::class);
     Route::resource('schedules', \App\Http\Controllers\ScheduleController::class)->except(['show', 'edit', 'update']);
     Route::post('schedules/auto-generate', [\App\Http\Controllers\ScheduleController::class, 'autoGenerate'])->name('schedules.auto-generate');
@@ -41,9 +46,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('reports/summary/print', [\App\Http\Controllers\ReportController::class, 'printSummary'])->name('reports.summary.print');
     Route::post('reports/recalculate', [\App\Http\Controllers\ReportController::class, 'recalculate'])->name('reports.recalculate');
     
-    // ZKTeco Custom routes
-    Route::post('/zkteco/sync', [ZktecoController::class, 'syncAttendance'])->name('zkteco.sync');
-    Route::post('/zkteco/sync-users', [ZktecoController::class, 'syncUsers'])->name('zkteco.sync-users');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

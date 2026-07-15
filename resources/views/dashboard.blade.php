@@ -73,35 +73,7 @@
                             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                         </div>
                         <p class="text-gray-500 font-medium">Belum ada data absensi hari ini.</p>
-                        <p class="text-sm text-gray-400 mt-1">Lakukan sinkronisasi dengan mesin ZKTeco untuk memperbarui data.</p>
-                        
-                        @hasanyrole('Admin|HR|Supervisor')
-                        <form action="{{ route('zkteco.sync') }}" method="POST" class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3" onsubmit="document.getElementById('sync-overlay').classList.remove('hidden')">
-                            @csrf
-                            <div class="flex items-center gap-2">
-                                <input type="date" name="start_date" class="border-gray-200 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" title="Tanggal Awal">
-                                <span class="text-gray-500 text-sm">s/d</span>
-                                <input type="date" name="end_date" class="border-gray-200 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm" title="Tanggal Akhir">
-                            </div>
-                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-sm shadow-blue-500/30">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                Tarik Data Absensi
-                            </button>
-                        </form>
-                        
-                        <!-- Overlay Loading -->
-                        <div id="sync-overlay" class="hidden fixed inset-0 z-50 bg-gray-900/60 backdrop-blur-sm flex flex-col items-center justify-center">
-                            <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center max-w-sm w-full mx-4">
-                                <svg class="animate-spin -ml-1 mr-3 h-12 w-12 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1">Sedang Menarik Data...</h3>
-                                <p class="text-sm text-gray-500 text-center">Tunggu sebentar, proses ini bisa memakan waktu 1-2 menit tergantung banyaknya riwayat absensi di mesin ZKTeco.</p>
-                                <p class="text-xs text-red-500 text-center mt-3 font-medium">Jangan tutup atau refresh halaman ini!</p>
-                            </div>
-                        </div>
-                        @endhasanyrole
+                        <p class="text-sm text-gray-400 mt-1">Data absensi akan diperbarui secara otomatis oleh sistem tersinkronisasi.</p>
                     </div>
                 </div>
             </div>

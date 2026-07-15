@@ -31,8 +31,8 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="text-indigo-900 font-bold mb-1">Panduan: Tarik Data Absensi</h4>
-                    <p class="text-indigo-800 text-sm">Halaman ini menampilkan seluruh riwayat log (sidik jari/wajah) dari mesin. Untuk mendapatkan data terbaru, klik tombol <strong>"Tarik Data Absensi"</strong>. Anda juga bisa memilih rentang tanggal agar proses penarikan lebih cepat dan fokus pada tanggal tertentu saja. Pastikan mesin dalam keadaan <span class="bg-green-100 text-green-700 px-1.5 py-0.5 rounded text-xs font-semibold">Online</span> di menu Perangkat ZKTeco sebelum menarik data.</p>
+                    <h4 class="text-indigo-900 font-bold mb-1">Panduan: Data Absensi</h4>
+                    <p class="text-indigo-800 text-sm">Halaman ini menampilkan seluruh riwayat log (sidik jari/wajah) dari mesin. Data absensi diperbarui secara otomatis oleh sistem yang tersinkronisasi. Anda dapat mencari dan memfilter berdasarkan rentang tanggal.</p>
                 </div>
             </div>
 
@@ -44,10 +44,15 @@
                     </div>
                     
                     <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <button type="button" onclick="document.getElementById('sync-modal').classList.remove('hidden')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition inline-flex items-center gap-2 w-full sm:w-auto justify-center">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                            Tarik Data Absensi
-                        </button>
+                        @if(app()->environment('local'))
+                        <form action="{{ route('zkteco.sync-attendance') }}" method="POST" class="w-full sm:w-auto m-0">
+                            @csrf
+                            <button type="submit" onclick="document.getElementById('sync-overlay').classList.remove('hidden'); document.getElementById('sync-overlay').classList.add('flex');" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition inline-flex items-center justify-center gap-2 border border-transparent">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                Tarik Data Absensi
+                            </button>
+                        </form>
+                        @endif
                         <a href="{{ route('attendances.create') }}" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-xl font-medium shadow-sm transition inline-flex items-center gap-2 w-full sm:w-auto justify-center">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             Tambah Manual
@@ -95,39 +100,7 @@
                     </div>
                 </div>
                 
-                <!-- Sync Modal -->
-                <div id="sync-modal" class="hidden fixed inset-0 z-50 bg-gray-900/60 backdrop-blur-sm flex flex-col items-center justify-center">
-                    <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full mx-4">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-bold text-gray-900">Tarik Data Absensi</h3>
-                            <button type="button" onclick="document.getElementById('sync-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                            </button>
-                        </div>
-                        <p class="text-sm text-gray-500 mb-4">Pilih rentang tanggal untuk mempercepat proses penarikan data dari mesin. Kosongkan jika ingin menarik seluruh data.</p>
-                        
-                        <form action="{{ route('zkteco.sync') }}" method="POST" onsubmit="document.getElementById('sync-modal').classList.add('hidden'); document.getElementById('sync-overlay').classList.remove('hidden');">
-                            @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Awal</label>
-                                    <input type="date" name="start_date" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Akhir</label>
-                                    <input type="date" name="end_date" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                                </div>
-                            </div>
-                            <div class="flex justify-end gap-3">
-                                <button type="button" onclick="document.getElementById('sync-modal').classList.add('hidden')" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-xl font-medium hover:bg-gray-50 transition">
-                                    Batal
-                                </button>
-                                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-medium shadow-sm transition inline-flex items-center gap-2">
-                                    <svg class="w-4 h-4 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                    Mulai Tarik Data
-                                </button>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
                 

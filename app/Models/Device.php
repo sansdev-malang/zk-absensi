@@ -15,5 +15,11 @@ class Device extends Model
         'firmware',
         'kapasitas',
         'status',
+        'last_sync_at',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
+        'last_sync_at' => 'datetime',
     ];
 }

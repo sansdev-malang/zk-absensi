@@ -85,7 +85,15 @@ class AttendanceCalculatorService
                           ->get();
 
         $jamMasuk = $logs->first() ? Carbon::parse($logs->first()->waktu) : null;
-        $jamPulang = $logs->count() > 1 ? Carbon::parse($logs->last()->waktu) : null;
+        $jamPulang = null;
+        
+        if ($jamMasuk && $logs->count() > 1) {
+            $lastLog = Carbon::parse($logs->last()->waktu);
+            // Mencegah double tap dalam waktu berdekatan (< 30 menit) dianggap sebagai jam pulang
+            if ($jamMasuk->diffInMinutes($lastLog) >= 30) {
+                $jamPulang = $lastLog;
+            }
+        }
 
         // 4. Kalkulasi Keterlambatan
         $menitTerlambat = 0;

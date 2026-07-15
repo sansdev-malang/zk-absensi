@@ -31,7 +31,7 @@ class ZktecoController extends Controller
         $affectedCalculations = []; // Menyimpan [user_id => ['Y-m-d', 'Y-m-d']]
 
         foreach ($devices as $device) {
-            $zkteco = new ZktecoService($device->ip_address, $device->port);
+            $zkteco = new ZktecoService($device->ip_address, $device->port, $device->comm_key);
             
             if ($zkteco->connect()) {
                 $logs = $zkteco->getAttendance();
@@ -106,7 +106,7 @@ class ZktecoController extends Controller
         $failedDevices = [];
 
         foreach ($devices as $device) {
-            $zkteco = new ZktecoService($device->ip_address, $device->port);
+            $zkteco = new ZktecoService($device->ip_address, $device->port, $device->comm_key);
             
             if ($zkteco->connect()) {
                 $users = $zkteco->getUsers();

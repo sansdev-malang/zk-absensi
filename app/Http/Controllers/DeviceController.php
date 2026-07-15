@@ -14,11 +14,19 @@ class DeviceController extends Controller
         $devices->map(function ($device) {
             $isOnline = false;
             if ($device->status) {
-                // Check if device is reachable on its IP and Port with a 1-second timeout
-                $fp = @fsockopen($device->ip_address, $device->port, $errno, $errstr, 1);
-                if ($fp) {
+                // Mode 1: Cek dari last_sync_at (Cloud-friendly)
+                if ($device->last_sync_at && $device->last_sync_at->diffInMinutes(now()) <= 15) {
                     $isOnline = true;
-                    fclose($fp);
+                } else {
+                    // Mode 2: Fallback ke Ping langsung (Local-friendly)
+                    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                        exec("ping -n 1 -w 1000 " . escapeshellarg($device->ip_address), $output, $status);
+                    } else {
+                        exec("ping -c 1 -W 1 " . escapeshellarg($device->ip_address), $output, $status);
+                    }
+                    if ($status === 0) {
+                        $isOnline = true;
+                    }
                 }
             }
             $device->is_online = $isOnline;

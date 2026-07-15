@@ -11,13 +11,13 @@ class ZktecoService
     protected $port;
     protected $zk;
 
-    public function __construct($ip = '192.168.1.201', $port = 4370)
+    public function __construct($ip = '192.168.1.201', $port = 4370, $commKey = 0)
     {
         $this->ip = $ip;
         $this->port = $port;
         // Menggunakan protokol TCP.
         try {
-            $this->zk = new ZKTeco($ip, $port, false, 25, 0, 'tcp');
+            $this->zk = new ZKTeco($ip, $port, false, 25, $commKey, 'tcp');
         } catch (\Throwable $e) {
             $this->zk = null;
         }
