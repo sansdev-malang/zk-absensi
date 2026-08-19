@@ -89,12 +89,14 @@ class UserController extends Controller
 
         $user->assignRole($request->role);
 
-        // Sinkronisasi ke Mesin ZKTeco
+        // Sinkronisasi ke Mesin ZKTeco (Di-handle oleh local-sync sekarang)
+        /*
         if ($user->uid) {
             $this->syncUserToDevices($user->uid, $user->name, $request->role);
         }
+        */
 
-        return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil ditambahkan dan disinkronisasikan ke mesin.');
+        return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil ditambahkan. Sinkronisasi ke mesin akan dilakukan otomatis oleh script lokal.');
     }
 
     public function edit(User $user)
@@ -133,7 +135,8 @@ class UserController extends Controller
         $user->update($data);
         $user->syncRoles([$request->role]);
 
-        // Sinkronisasi Perubahan ke Mesin
+        // Sinkronisasi Perubahan ke Mesin (Di-handle oleh local-sync sekarang)
+        /*
         if ($oldUid && $oldUid !== $user->uid) {
             // Hapus UID lama
             $this->removeUserFromDevices($oldUid);
@@ -141,8 +144,9 @@ class UserController extends Controller
         if ($user->uid) {
             $this->syncUserToDevices($user->uid, $user->name, $request->role);
         }
+        */
 
-        return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil diperbarui dan disinkronisasikan ke mesin.');
+        return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil diperbarui. Sinkronisasi ke mesin akan dilakukan otomatis oleh script lokal.');
     }
 
     public function destroy(User $user)
@@ -158,12 +162,38 @@ class UserController extends Controller
         $uid = $user->uid;
         $user->delete();
 
-        // Hapus dari mesin
+        // Hapus dari mesin (Di-handle oleh local-sync sekarang)
+        /*
         if ($uid) {
             $this->removeUserFromDevices($uid);
         }
+        */
 
-        return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil dihapus, termasuk dari mesin absensi.');
+        return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil dihapus. Sinkronisasi ke mesin akan dilakukan otomatis oleh script lokal.');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        try {
+            \Maatwebsite\Excel\Facades\Excel::import(new \App\Imports\UsersImport, $request->file('file'));
+            return redirect()->route('users.index')->with('success', 'Data Karyawan berhasil diimport.');
+        } catch (\Exception $e) {
+            return redirect()->route('users.index')->with('error', 'Gagal mengimport data: ' . $e->getMessage());
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\UsersTemplateExport, 'Format_Import_Karyawan.xlsx');
+    }
+
+    public function export(Request $request)
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\UsersExport($request), 'Data_Karyawan_'.date('Ymd_His').'.xlsx');
     }
 
     /**

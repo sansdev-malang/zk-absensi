@@ -111,7 +111,7 @@ class User
 
                 $data = [
                     'uid'       => $uid,
-                    'user_id'   => intval($userid),
+                    'user_id'   => $userid,
                     'name'      => $name,
                     'role'      => intval($role),
                     'password'  => $password,
@@ -121,10 +121,10 @@ class User
 
                 if (is_callable($callback)) {
                     if($newData = $callback($data)){
-                        $users[$userid] = $newData;
+                        $users[$uid] = $newData;
                     }
                 } else {
-                    $users[$userid] = $data;
+                    $users[$uid] = $data;
                 }
 
                 $userData = substr($userData, 72);

@@ -33,13 +33,7 @@ class RobustZkteco
             return false;
         }
 
-        // [PENTING] Ping rahasia untuk "membangunkan" mesin lama (seperti Mesin 1)
-        // Kita tidak akan membatalkan proses jika ini gagal, agar Mesin 2 tetap bisa jalan
-        $fp = @fsockopen($this->ip, $this->port, $errno, $errstr, 2);
-        if ($fp) {
-            fclose($fp);
-        }
-
+        // [PENTING] Ping rahasia dinonaktifkan karena menyebabkan hang di mesin 1
         try {
             $conn = $this->zk->connect();
             if (!$conn) {
@@ -130,5 +124,49 @@ class RobustZkteco
             }
         } catch (\Exception $e) {}
         return [];
+    }
+
+    public function setUsers(array $users)
+    {
+        $pushedCount = 0;
+        try {
+            sleep(2); // Beri waktu mesin ZKTeco untuk mereset socket TCP setelah fungsi getUsers/getAttendance
+            if ($this->connect()) {
+                foreach ($users as $u) {
+                    // $u = ['uid' => internal_id, 'userid' => PIN, 'name' => name, 'password' => pass, 'role' => role]
+                    $res = $this->zk->setUser((int)$u['uid'], (string)$u['userid'], $u['name'], $u['password'], (int)$u['role']);
+                    if ($res) {
+                        $pushedCount++;
+                    }
+                }
+                $this->disconnect();
+            } else {
+                echo "   [Error] Gagal koneksi ke mesin saat proses Push User (mesin menolak koneksi beruntun).\n";
+            }
+        } catch (\Exception $e) {
+            echo "   [Exception] " . $e->getMessage() . "\n";
+        }
+        return $pushedCount;
+    }
+
+    public function deleteUsers(array $uids)
+    {
+        $deletedCount = 0;
+        try {
+            sleep(5);
+            if ($this->connect()) {
+                foreach ($uids as $uid) {
+                    // Hanya bisa pakai integer UID sesuai standar library
+                    $res = $this->zk->removeUser((int)$uid);
+                    if ($res) {
+                        $deletedCount++;
+                    }
+                }
+                $this->disconnect();
+            }
+        } catch (\Exception $e) {
+            echo "   [Exception saat menghapus user]: " . $e->getMessage() . "\n";
+        }
+        return $deletedCount;
     }
 }

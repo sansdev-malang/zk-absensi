@@ -8,4 +8,6 @@ use App\Http\Middleware\VerifySyncToken;
 Route::middleware([VerifySyncToken::class])->group(function () {
     Route::post('/sync/attendance', [ZktecoSyncController::class, 'syncAttendance']);
     Route::post('/sync/users', [ZktecoSyncController::class, 'syncUsers']);
+    Route::get('/sync/users-to-push', [ZktecoSyncController::class, 'getUsersToPush']);
+    Route::get('/sync/devices', [ZktecoSyncController::class, 'getDevices']);
 });

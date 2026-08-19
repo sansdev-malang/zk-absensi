@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Attendance;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Services\AttendanceCalculatorService;
 
 class ZktecoSyncController extends Controller
 {
@@ -32,6 +33,7 @@ class ZktecoSyncController extends Controller
         }
 
         $totalSynced = 0;
+        $usersToRecalculate = [];
         
         foreach ($logs as $log) {
             $userId = $log['user_id'] ?? $log['uid'] ?? null;
@@ -55,6 +57,11 @@ class ZktecoSyncController extends Controller
                     
                     if ($attendance->wasRecentlyCreated) {
                         $totalSynced++;
+                        $dateString = $waktu->toDateString();
+                        $usersToRecalculate[$user->id][$dateString] = [
+                            'user' => $user,
+                            'date' => $waktu->copy()->startOfDay()
+                        ];
                     }
                 } catch (\Exception $e) {
                     Log::error("API Error saving attendance from device {$device->ip_address}: " . $e->getMessage());
@@ -62,7 +69,23 @@ class ZktecoSyncController extends Controller
             }
         }
 
-        $device->update(['last_sync_at' => now()]);
+        // Recalculate daily attendance for affected users/dates
+        try {
+            $calculator = app(\App\Services\AttendanceCalculatorService::class);
+            foreach ($usersToRecalculate as $userId => $dates) {
+                foreach ($dates as $dateString => $data) {
+                    try {
+                        $calculator->calculateUserDaily($data['user'], $data['date']);
+                    } catch (\Throwable $e) {
+                        Log::error("Failed to recalculate attendance for User {$userId} on {$dateString}: " . $e->getMessage());
+                    }
+                }
+            }
+        } catch (\Throwable $e) {
+            Log::error("Calculator service not found or failed: " . $e->getMessage());
+        }
+
+
 
         return response()->json([
             'message' => 'Sync successful',
@@ -101,29 +124,65 @@ class ZktecoSyncController extends Controller
             $existing = User::where('uid', $pin)->first();
             
             if (!$existing) {
-                // Buat user baru
-                $email = strtolower(str_replace(' ', '', $pin)) . '@example.com';
-                // Cek email unique
-                if (User::where('email', $email)->exists()) {
-                    $email = strtolower(str_replace(' ', '', $pin)) . '_' . uniqid() . '@example.com';
-                }
-
-                $user = User::create([
-                    'name' => $userData['name'] ?: 'Pegawai ' . $pin,
-                    'email' => $email,
-                    'password' => bcrypt('12345678'),
-                    'uid' => $pin,
-                ]);
-                $user->assignRole('User');
+                // Jangan buat user baru secara otomatis karena Web adalah Master.
+                // Abaikan user dari mesin yang tidak ada di Web.
+                continue;
+            } else {
                 $totalSynced++;
             }
         }
 
-        $device->update(['last_sync_at' => now()]);
+
 
         return response()->json([
             'message' => 'Users sync successful',
             'synced_count' => $totalSynced
+        ]);
+    }
+
+    /**
+     * Get list of users to be pushed to the devices.
+     */
+    public function getUsersToPush(Request $request)
+    {
+        // Get all active users that have a UID.
+        // We can optimize this later by adding a synced flag, but for now we push all active users
+        // to ensure machines are up to date. Pushing users is fast.
+        $users = User::whereNotNull('uid')
+            ->where('uid', '!=', '')
+            ->with('roles')
+            ->get()
+            ->map(function($user) {
+                return [
+                    'internal_id' => $user->id,
+                    'uid' => $user->uid,
+                    'name' => $user->name,
+                    'password' => '', // Web hashed password cannot be used for machine, usually set empty
+                    'role' => $user->hasRole('Admin') ? 14 : 0, // 14 for Super Admin, 0 for Normal User
+                ];
+            });
+
+        return response()->json([
+            'users' => $users
+        ]);
+    }
+
+    /**
+     * Get list of active devices to be synced.
+     */
+    public function getDevices(Request $request)
+    {
+        $devices = Device::where('status', true)->get()->map(function($device) {
+            return [
+                'ip' => $device->ip_address,
+                'port' => $device->port,
+                'com_key' => (int) ($device->comm_key ?? 0),
+                'protocol' => 'udp'
+            ];
+        });
+
+        return response()->json([
+            'devices' => $devices
         ]);
     }
 }

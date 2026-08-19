@@ -16,11 +16,16 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::view('/tutorial', 'tutorial')->name('tutorial');
+    Route::get('users/template', [UserController::class, 'downloadTemplate'])->name('users.template');
+    Route::post('users/import', [UserController::class, 'import'])->name('users.import');
+    Route::get('users/export', [UserController::class, 'export'])->name('users.export');
     Route::resource('users', UserController::class);
     Route::patch('users/{user}/update-shift', [UserController::class, 'updateShift'])->name('users.update-shift');
+    Route::get('attendances/log', [AttendanceController::class, 'log'])->name('attendances.log');
     Route::resource('attendances', AttendanceController::class);
     Route::resource('devices', DeviceController::class);
     Route::post('devices/{device}/clear-logs', [DeviceController::class, 'clearLogs'])->name('devices.clear-logs');
+    Route::post('devices/{device}/test-connection', [DeviceController::class, 'testConnection'])->name('devices.test-connection');
 
     if (app()->environment('local')) {
         Route::post('zkteco/sync-attendance', [ZktecoController::class, 'syncAttendance'])->name('zkteco.sync-attendance');

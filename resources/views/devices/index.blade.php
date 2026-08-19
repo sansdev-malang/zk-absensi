@@ -30,6 +30,41 @@
                 </div>
             </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Total Mesin -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm flex items-center gap-4">
+                    <div class="bg-blue-50 p-3 rounded-xl text-blue-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Total Mesin</p>
+                        <h4 class="text-2xl font-bold text-gray-900">{{ $devices->count() }}</h4>
+                    </div>
+                </div>
+
+                <!-- Total Online -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm flex items-center gap-4">
+                    <div class="bg-green-50 p-3 rounded-xl text-green-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Total Online</p>
+                        <h4 class="text-2xl font-bold text-gray-900">{{ $devices->where('is_online', true)->count() }}</h4>
+                    </div>
+                </div>
+
+                <!-- Total Offline -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm flex items-center gap-4">
+                    <div class="bg-red-50 p-3 rounded-xl text-red-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 mb-1">Total Offline (Aktif)</p>
+                        <h4 class="text-2xl font-bold text-gray-900">{{ $devices->where('status', true)->where('is_online', false)->count() }}</h4>
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-white overflow-hidden shadow-sm rounded-2xl border border-gray-100">
                 <div class="p-6 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
@@ -46,9 +81,12 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider border-b border-gray-100">
+                                <th class="px-6 py-4 font-medium">No</th>
                                 <th class="px-6 py-4 font-medium">Nama Mesin</th>
-                                <th class="px-6 py-4 font-medium">No Mesin</th>
-                                <th class="px-6 py-4 font-medium">IP Address:Port</th>
+                                <th class="px-6 py-4 font-medium">IP Address</th>
+                                <th class="px-6 py-4 font-medium">Port</th>
+                                <th class="px-6 py-4 font-medium">Tipe Mesin</th>
+                                <th class="px-6 py-4 font-medium">Lokasi/Area</th>
                                 <th class="px-6 py-4 font-medium">Status</th>
                                 <th class="px-6 py-4 font-medium text-right">Aksi</th>
                             </tr>
@@ -56,13 +94,14 @@
                         <tbody class="divide-y divide-gray-100">
                             @forelse($devices as $device)
                                 <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4 text-gray-600">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4">
                                         <div class="font-medium text-gray-900">{{ $device->nama_mesin }}</div>
                                     </td>
-                                    <td class="px-6 py-4 text-gray-600">{{ $device->nomor_mesin }}</td>
-                                    <td class="px-6 py-4 text-gray-600 font-mono text-sm">
-                                        {{ $device->ip_address }}:{{ $device->port }}
-                                    </td>
+                                    <td class="px-6 py-4 text-gray-600 font-mono text-sm">{{ $device->ip_address }}</td>
+                                    <td class="px-6 py-4 text-gray-600 font-mono text-sm">{{ $device->port }}</td>
+                                    <td class="px-6 py-4 text-gray-600">{{ $device->tipe_mesin ?? '-' }}</td>
+                                    <td class="px-6 py-4 text-gray-600">{{ $device->lokasi ?? '-' }}</td>
                                     <td class="px-6 py-4 space-y-1">
                                         @if($device->status)
                                             <div class="flex items-center gap-2">
@@ -88,14 +127,14 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 text-right space-x-3">
-                                        <a href="{{ route('devices.edit', $device->id) }}" class="text-blue-600 hover:text-blue-900 font-medium text-sm transition">Edit</a>
-                                        
-                                        <form action="{{ route('devices.clear-logs', $device->id) }}" method="POST" class="inline-block" onsubmit="return confirm('PERINGATAN KERAS!\n\nApakah Anda benar-benar yakin ingin MENGHAPUS SELURUH LOG ABSENSI secara permanen dari dalam memori mesin fisik ZKTeco ini?\n\nProses ini tidak dapat dibatalkan!');">
+                                    <td class="px-6 py-4 text-right space-x-3 whitespace-nowrap">
+                                        <form action="{{ route('devices.test-connection', $device->id) }}" method="POST" class="inline-block">
                                             @csrf
-                                            <button type="submit" class="text-orange-600 hover:text-orange-900 font-medium text-sm transition">Bersihkan Log Mesin</button>
+                                            <button type="submit" class="text-green-600 hover:text-green-900 font-medium text-sm transition">Tes Koneksi</button>
                                         </form>
 
+                                        <a href="{{ route('devices.edit', $device->id) }}" class="text-blue-600 hover:text-blue-900 font-medium text-sm transition">Edit</a>
+                                        
                                         <form action="{{ route('devices.destroy', $device->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus perangkat ini?');">
                                             @csrf
                                             @method('DELETE')
@@ -105,7 +144,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                                    <td colspan="8" class="px-6 py-12 text-center text-gray-500">
                                         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4">
                                             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
                                         </div>

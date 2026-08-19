@@ -1,0 +1,1964 @@
+{
+    "2": {
+        "uid": 2,
+        "user_id": "ASSA9365",
+        "name": "Noor Jehhan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "3": {
+        "uid": 3,
+        "user_id": "ASSA9366",
+        "name": "Hj. Sri  Yudiyanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "4": {
+        "uid": 4,
+        "user_id": "ASSA9367",
+        "name": "Andreas Setiyono",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "5": {
+        "uid": 5,
+        "user_id": "ASSA9368",
+        "name": "Heni Hidayah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "6": {
+        "uid": 6,
+        "user_id": "ASSA9369",
+        "name": "Achmad Efendi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "7": {
+        "uid": 7,
+        "user_id": "ASSA9370",
+        "name": "Amiruddin Nahdliyan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "8": {
+        "uid": 8,
+        "user_id": "ASSA9371",
+        "name": "Herlina Tri Pambudiati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "9": {
+        "uid": 9,
+        "user_id": "ASSA9372",
+        "name": "Mochamad Ichsan Wibowo",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "10": {
+        "uid": 10,
+        "user_id": "ASSA9373",
+        "name": "Diah Anita Ludfiana",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "11": {
+        "uid": 11,
+        "user_id": "ASSA9374",
+        "name": "Muhammad Firmansyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "12": {
+        "uid": 12,
+        "user_id": "ASSA9375",
+        "name": "Ika Suudia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "13": {
+        "uid": 13,
+        "user_id": "ASSA9376",
+        "name": "Hadi Susanto",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "14": {
+        "uid": 14,
+        "user_id": "ASSA9377",
+        "name": "Ghoniyur Rohman",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "15": {
+        "uid": 15,
+        "user_id": "ASSA9379",
+        "name": "Binti Saniatul Munawaroh",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "16": {
+        "uid": 16,
+        "user_id": "ASSA9380",
+        "name": "Mutaahirotul Hidayati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "17": {
+        "uid": 17,
+        "user_id": "ASSA9381",
+        "name": "Risas Wahyudi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "18": {
+        "uid": 18,
+        "user_id": "ASSA9382",
+        "name": "Sri Subakti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "19": {
+        "uid": 19,
+        "user_id": "ASSA9383",
+        "name": "Lailatul Munawaroh",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "20": {
+        "uid": 20,
+        "user_id": "ASSA9384",
+        "name": "Masruhan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "21": {
+        "uid": 21,
+        "user_id": "ASSA9385",
+        "name": "Ika Wijayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "22": {
+        "uid": 22,
+        "user_id": "ASSA9386",
+        "name": "Davies Yudisno",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "23": {
+        "uid": 23,
+        "user_id": "ASSA9387",
+        "name": "Elvera Rosana E.",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "24": {
+        "uid": 24,
+        "user_id": "ASSA9388",
+        "name": "Imarotul Muhibbah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "25": {
+        "uid": 25,
+        "user_id": "ASSA9389",
+        "name": "Arif Nur Rahman",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "26": {
+        "uid": 26,
+        "user_id": "ASSA9390",
+        "name": "Ucik Sriwahyuni",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "27": {
+        "uid": 27,
+        "user_id": "ASSA9391",
+        "name": "Mokh. Danny Permata Utom",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "28": {
+        "uid": 28,
+        "user_id": "ASSA9392",
+        "name": "Aning Masyrufatin Furoid",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "29": {
+        "uid": 29,
+        "user_id": "ASSA9393",
+        "name": "Nur Risky Marsa Romadhon",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "30": {
+        "uid": 30,
+        "user_id": "ASSA9394",
+        "name": "Miftakhul Jannah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "31": {
+        "uid": 31,
+        "user_id": "ASSA9395",
+        "name": "Paramita Puri Anggraini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "32": {
+        "uid": 32,
+        "user_id": "ASSA9397",
+        "name": "Anis Amilia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "33": {
+        "uid": 33,
+        "user_id": "ASSA9398",
+        "name": "Romadhoniar Fitri Aini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "34": {
+        "uid": 34,
+        "user_id": "ASSA9399",
+        "name": "Jaronah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "35": {
+        "uid": 35,
+        "user_id": "ASSA9400",
+        "name": "Nihayatul Hasanah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "36": {
+        "uid": 36,
+        "user_id": "ASSA9401",
+        "name": "Moch. Yusroni",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "37": {
+        "uid": 37,
+        "user_id": "ASSA9402",
+        "name": "Desi Ratnasari",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "38": {
+        "uid": 38,
+        "user_id": "ASSA9403",
+        "name": "Desti Ariani Mutiara",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "39": {
+        "uid": 39,
+        "user_id": "ASSA9404",
+        "name": "Kusnia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "40": {
+        "uid": 40,
+        "user_id": "ASSA9405",
+        "name": "Retno Sugiarti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "41": {
+        "uid": 41,
+        "user_id": "ASSA9407",
+        "name": "Puri Wiranti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "42": {
+        "uid": 42,
+        "user_id": "ASSA9408",
+        "name": "Denada Efrilia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "43": {
+        "uid": 43,
+        "user_id": "ASSA9409",
+        "name": "Mohamad Nurahman",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "44": {
+        "uid": 44,
+        "user_id": "ASSA9410",
+        "name": "Gita Noviria",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "45": {
+        "uid": 45,
+        "user_id": "ASSA9411",
+        "name": "Irma Wahyu Putri Yoditya",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "46": {
+        "uid": 46,
+        "user_id": "ASSA9412",
+        "name": "Prima Suci Ibar Wati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "47": {
+        "uid": 47,
+        "user_id": "ASSA9413",
+        "name": "Ainur Rifqi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "48": {
+        "uid": 48,
+        "user_id": "ASSA9415",
+        "name": "Dara Eges Nuryana",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "49": {
+        "uid": 49,
+        "user_id": "ASSA9417",
+        "name": "Miftakul Jannah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "50": {
+        "uid": 50,
+        "user_id": "ASSA9419",
+        "name": "Dini Eko Wulandari",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "51": {
+        "uid": 51,
+        "user_id": "ASSA9421",
+        "name": "Ari Iswahudi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "52": {
+        "uid": 52,
+        "user_id": "ASSA9422",
+        "name": "Yahya Firmansah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "53": {
+        "uid": 53,
+        "user_id": "ASSA9424",
+        "name": "Olga Putriana Wati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "54": {
+        "uid": 54,
+        "user_id": "ASSA9426",
+        "name": "Suwaibatul Aslamiyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "55": {
+        "uid": 55,
+        "user_id": "ASSA9427",
+        "name": "Nurul Asri Fitriyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "56": {
+        "uid": 56,
+        "user_id": "ASSA9429",
+        "name": "Ika Puspitasari",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "57": {
+        "uid": 57,
+        "user_id": "ASSA9430",
+        "name": "Rikha Dwi Rachmawati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "58": {
+        "uid": 58,
+        "user_id": "ASSA9431",
+        "name": "Milatun Nafisah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "59": {
+        "uid": 59,
+        "user_id": "ASSA9432",
+        "name": "Selvi Dwi Wahyuni",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "60": {
+        "uid": 60,
+        "user_id": "ASSA9435",
+        "name": "Mashuri",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "61": {
+        "uid": 61,
+        "user_id": "ASSA9436",
+        "name": "Sugianto",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "62": {
+        "uid": 62,
+        "user_id": "ASSA9437",
+        "name": "Abdul Khodir Zaelani",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "63": {
+        "uid": 63,
+        "user_id": "ASSA9438",
+        "name": "Mustangin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "64": {
+        "uid": 64,
+        "user_id": "ASSA9439",
+        "name": "Arsadi Sapto Kasusro",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "65": {
+        "uid": 65,
+        "user_id": "ASSA9441",
+        "name": "Dedy Irwanda",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "66": {
+        "uid": 66,
+        "user_id": "ASSA9442",
+        "name": "Rizky Risdianto",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "67": {
+        "uid": 67,
+        "user_id": "ASSA9443",
+        "name": "Maydia Quliatul Afifah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "68": {
+        "uid": 68,
+        "user_id": "ASSA9444",
+        "name": "Moh. Saiful Anwar",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "69": {
+        "uid": 69,
+        "user_id": "ASSA9445",
+        "name": "Kusnul Arifin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "70": {
+        "uid": 70,
+        "user_id": "ASSA9446",
+        "name": "Indah Purnawati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "71": {
+        "uid": 71,
+        "user_id": "ASSA9447",
+        "name": "Sujiati Sulistyowati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "72": {
+        "uid": 72,
+        "user_id": "ASSA9448",
+        "name": "Sodik Adi Utomo",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "73": {
+        "uid": 73,
+        "user_id": "ASSA9451",
+        "name": "Heri Setiawan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "74": {
+        "uid": 74,
+        "user_id": "ASSA9452",
+        "name": "Rusbiati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "75": {
+        "uid": 75,
+        "user_id": "ASSA9453",
+        "name": "Anita Andriani",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "76": {
+        "uid": 76,
+        "user_id": "ASSA9454",
+        "name": "Linda Widayati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "77": {
+        "uid": 77,
+        "user_id": "ASSA9455",
+        "name": "Ichwan Adi Prasetyo",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "78": {
+        "uid": 78,
+        "user_id": "ASSA9456",
+        "name": "Achmad Rodjaini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "79": {
+        "uid": 79,
+        "user_id": "ASSA9457",
+        "name": "Nova Nur Khasanah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "80": {
+        "uid": 80,
+        "user_id": "ASSA9458",
+        "name": "M. Mukid",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "81": {
+        "uid": 81,
+        "user_id": "ASSA9459",
+        "name": "Moh. Yanuar Ramadhan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "82": {
+        "uid": 82,
+        "user_id": "ASSA9462",
+        "name": "Bayu Putra",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "83": {
+        "uid": 83,
+        "user_id": "ASSA9463",
+        "name": "Muhamad Ihwan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "84": {
+        "uid": 84,
+        "user_id": "ASSA9464",
+        "name": "Ainun Hurrotaini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "85": {
+        "uid": 85,
+        "user_id": "ASSA9465",
+        "name": "Aisyah Ani Rosita",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "86": {
+        "uid": 86,
+        "user_id": "ASSA9466",
+        "name": "Zulaihah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "87": {
+        "uid": 87,
+        "user_id": "ASSA9467",
+        "name": "Rima Rahmayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "88": {
+        "uid": 88,
+        "user_id": "ASSA9468",
+        "name": "Sukma Abdul Rozy",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "89": {
+        "uid": 89,
+        "user_id": "ASSA9469",
+        "name": "Muhammad Abid Abdillah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "90": {
+        "uid": 90,
+        "user_id": "ASSA9470",
+        "name": "Iqbal Mubhij",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "91": {
+        "uid": 91,
+        "user_id": "ASSA9471",
+        "name": "Muhammad Wildan Makhasin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "92": {
+        "uid": 92,
+        "user_id": "ASSA9478",
+        "name": "Nurul Akhyar",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "93": {
+        "uid": 93,
+        "user_id": "ASSA20074",
+        "name": "Mohamad Fauzi Setiawan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "94": {
+        "uid": 94,
+        "user_id": "ASSA20075",
+        "name": "Wiratania",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "95": {
+        "uid": 95,
+        "user_id": "ASSA20076",
+        "name": "Rr. Nur Apriyanti Atika",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "96": {
+        "uid": 96,
+        "user_id": "ASSA20077",
+        "name": "Shofiyatul Mardiyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "97": {
+        "uid": 97,
+        "user_id": "ASSA20078",
+        "name": "Azzahro Maulidiah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "98": {
+        "uid": 98,
+        "user_id": "ASSA20079",
+        "name": "Sukmawati Megawijayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "99": {
+        "uid": 99,
+        "user_id": "ASSA20080",
+        "name": "Tursina Ainun Nisa",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "100": {
+        "uid": 100,
+        "user_id": "ASSA20081",
+        "name": "Selviya Anggraini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "101": {
+        "uid": 101,
+        "user_id": "ASSA20082",
+        "name": "Yossy Diko Pratamayuda",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "102": {
+        "uid": 102,
+        "user_id": "ASSA20083",
+        "name": "Ahmad Shobirin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "103": {
+        "uid": 103,
+        "user_id": "ASSA20084",
+        "name": "Fadhilah Aminazah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "104": {
+        "uid": 104,
+        "user_id": "ASSA20085",
+        "name": "Irdayus Melindra",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "105": {
+        "uid": 105,
+        "user_id": "ASSA20086",
+        "name": "Tri Maulid Dyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "106": {
+        "uid": 106,
+        "user_id": "ASSA20087",
+        "name": "Kunti Uswatun Hasanah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "107": {
+        "uid": 107,
+        "user_id": "ASSA20088",
+        "name": "Agus Anugrah Purwandaru",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "108": {
+        "uid": 108,
+        "user_id": "ASSA20089",
+        "name": "Desilfa Dwi Nursavitri",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "109": {
+        "uid": 109,
+        "user_id": "ASSA20090",
+        "name": "Farid Rakhim",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "110": {
+        "uid": 110,
+        "user_id": "ASSA20091",
+        "name": "Aisah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "111": {
+        "uid": 111,
+        "user_id": "ASSA20092",
+        "name": "Naufal Jabir Al Fakhry",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "112": {
+        "uid": 112,
+        "user_id": "ASSA20093",
+        "name": "Bunga Dianita Primanda",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "113": {
+        "uid": 113,
+        "user_id": "ASSA20094",
+        "name": "Nur Reza Pratiwi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "114": {
+        "uid": 114,
+        "user_id": "ASSA20095",
+        "name": "Nur Laili Saadah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "115": {
+        "uid": 115,
+        "user_id": "2",
+        "name": "Noor Jehhan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "116": {
+        "uid": 116,
+        "user_id": "1",
+        "name": "Hj. Sri  Yudiyanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "117": {
+        "uid": 117,
+        "user_id": "3",
+        "name": "Heni Hidayah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "118": {
+        "uid": 118,
+        "user_id": "4",
+        "name": "Achmad Efendi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "119": {
+        "uid": 119,
+        "user_id": "5",
+        "name": "Amiruddin Nahdliyan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "120": {
+        "uid": 120,
+        "user_id": "6",
+        "name": "Herlina Tri Pambudiati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "121": {
+        "uid": 121,
+        "user_id": "7",
+        "name": "Mochamad Ichsan Wibowo",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "122": {
+        "uid": 122,
+        "user_id": "8",
+        "name": "Diah Anita Ludfiana",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "123": {
+        "uid": 123,
+        "user_id": "9",
+        "name": "Muhammad Firmansyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "124": {
+        "uid": 124,
+        "user_id": "10",
+        "name": "Ika Suudia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "125": {
+        "uid": 125,
+        "user_id": "11",
+        "name": "Hadi Susanto",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "126": {
+        "uid": 126,
+        "user_id": "12",
+        "name": "Ghoniyur Rohman",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "127": {
+        "uid": 127,
+        "user_id": "13",
+        "name": "Binti Saniatul Munawaroh",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "128": {
+        "uid": 128,
+        "user_id": "14",
+        "name": "Mutaahirotul Hidayati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "129": {
+        "uid": 129,
+        "user_id": "15",
+        "name": "Risas Wahyudi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "130": {
+        "uid": 130,
+        "user_id": "16",
+        "name": "Sri Subakti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "131": {
+        "uid": 131,
+        "user_id": "17",
+        "name": "Lailatul Munawaroh",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "132": {
+        "uid": 132,
+        "user_id": "18",
+        "name": "Masruhan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "133": {
+        "uid": 133,
+        "user_id": "19",
+        "name": "Ika Wijayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "134": {
+        "uid": 134,
+        "user_id": "20",
+        "name": "Davies Yudisno",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "135": {
+        "uid": 135,
+        "user_id": "21",
+        "name": "Elvera Rosana E.",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "136": {
+        "uid": 136,
+        "user_id": "22",
+        "name": "Imarotul Muhibbah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "137": {
+        "uid": 137,
+        "user_id": "23",
+        "name": "Arif Nur Rahman",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "138": {
+        "uid": 138,
+        "user_id": "24",
+        "name": "Ucik Sriwahyuni",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "139": {
+        "uid": 139,
+        "user_id": "25",
+        "name": "Mokh. Danny Permata Utom",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "140": {
+        "uid": 140,
+        "user_id": "26",
+        "name": "Aning Masyrufatin Furoid",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "141": {
+        "uid": 141,
+        "user_id": "27",
+        "name": "Nur Risky Marsa Romadhon",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "142": {
+        "uid": 142,
+        "user_id": "28",
+        "name": "Miftakhul Jannah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "143": {
+        "uid": 143,
+        "user_id": "29",
+        "name": "Paramita Puri Anggraini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "144": {
+        "uid": 144,
+        "user_id": "30",
+        "name": "Anis Amilia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "145": {
+        "uid": 145,
+        "user_id": "31",
+        "name": "Romadhoniar Fitri Aini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "146": {
+        "uid": 146,
+        "user_id": "32",
+        "name": "Jaronah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "147": {
+        "uid": 147,
+        "user_id": "33",
+        "name": "Nihayatul Hasanah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "148": {
+        "uid": 148,
+        "user_id": "34",
+        "name": "Moch. Yusroni",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "149": {
+        "uid": 149,
+        "user_id": "35",
+        "name": "Desi Ratnasari",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "150": {
+        "uid": 150,
+        "user_id": "36",
+        "name": "Desti Ariani Mutiara",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "151": {
+        "uid": 151,
+        "user_id": "37",
+        "name": "Kusnia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "152": {
+        "uid": 152,
+        "user_id": "38",
+        "name": "Retno Sugiarti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "153": {
+        "uid": 153,
+        "user_id": "39",
+        "name": "Puri Wiranti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "154": {
+        "uid": 154,
+        "user_id": "40",
+        "name": "Denada Efrilia",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "155": {
+        "uid": 155,
+        "user_id": "41",
+        "name": "Mohamad Nurahman",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "156": {
+        "uid": 156,
+        "user_id": "42",
+        "name": "Gita Noviria",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "157": {
+        "uid": 157,
+        "user_id": "43",
+        "name": "Irma Wahyu Putri Yoditya",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "158": {
+        "uid": 158,
+        "user_id": "44",
+        "name": "Prima Suci Ibar Wati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "159": {
+        "uid": 159,
+        "user_id": "45",
+        "name": "Ainur Rifqi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "160": {
+        "uid": 160,
+        "user_id": "46",
+        "name": "Dara Eges Nuryana",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "161": {
+        "uid": 161,
+        "user_id": "47",
+        "name": "Miftakul Jannah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "162": {
+        "uid": 162,
+        "user_id": "48",
+        "name": "Dini Eko Wulandari",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "163": {
+        "uid": 163,
+        "user_id": "49",
+        "name": "Ari Iswahudi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "164": {
+        "uid": 164,
+        "user_id": "50",
+        "name": "Yahya Firmansah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "165": {
+        "uid": 165,
+        "user_id": "51",
+        "name": "Olga Putriana Wati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "166": {
+        "uid": 166,
+        "user_id": "52",
+        "name": "Suwaibatul Aslamiyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "167": {
+        "uid": 167,
+        "user_id": "53",
+        "name": "Nurul Asri Fitriyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "168": {
+        "uid": 168,
+        "user_id": "54",
+        "name": "Ika Puspitasari",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "169": {
+        "uid": 169,
+        "user_id": "55",
+        "name": "Rikha Dwi Rachmawati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "170": {
+        "uid": 170,
+        "user_id": "56",
+        "name": "Milatun Nafisah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "171": {
+        "uid": 171,
+        "user_id": "57",
+        "name": "Selvi Dwi Wahyuni",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "172": {
+        "uid": 172,
+        "user_id": "58",
+        "name": "Mashuri",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "173": {
+        "uid": 173,
+        "user_id": "59",
+        "name": "Sugianto",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "174": {
+        "uid": 174,
+        "user_id": "60",
+        "name": "Abdul Khodir Zaelani",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "175": {
+        "uid": 175,
+        "user_id": "61",
+        "name": "Mustangin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "176": {
+        "uid": 176,
+        "user_id": "62",
+        "name": "Arsadi Sapto Kasusro",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "177": {
+        "uid": 177,
+        "user_id": "63",
+        "name": "Dedy Irwanda",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "178": {
+        "uid": 178,
+        "user_id": "64",
+        "name": "Rizky Risdianto",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "179": {
+        "uid": 179,
+        "user_id": "65",
+        "name": "Maydia Quliatul Afifah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "180": {
+        "uid": 180,
+        "user_id": "66",
+        "name": "Moh. Saiful Anwar",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "181": {
+        "uid": 181,
+        "user_id": "67",
+        "name": "Kusnul Arifin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "182": {
+        "uid": 182,
+        "user_id": "68",
+        "name": "Indah Purnawati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "183": {
+        "uid": 183,
+        "user_id": "69",
+        "name": "Sujiati Sulistyowati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "184": {
+        "uid": 184,
+        "user_id": "70",
+        "name": "Sodik Adi Utomo",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "185": {
+        "uid": 185,
+        "user_id": "71",
+        "name": "Heri Setiawan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "186": {
+        "uid": 186,
+        "user_id": "72",
+        "name": "Rusbiati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "187": {
+        "uid": 187,
+        "user_id": "73",
+        "name": "Anita Andriani",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "188": {
+        "uid": 188,
+        "user_id": "74",
+        "name": "Linda Widayati",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "189": {
+        "uid": 189,
+        "user_id": "75",
+        "name": "Ichwan Adi Prasetyo",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "190": {
+        "uid": 190,
+        "user_id": "76",
+        "name": "Achmad Rodjaini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "191": {
+        "uid": 191,
+        "user_id": "77",
+        "name": "Nova Nur Khasanah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "192": {
+        "uid": 192,
+        "user_id": "78",
+        "name": "M. Mukid",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "193": {
+        "uid": 193,
+        "user_id": "79",
+        "name": "Moh. Yanuar Ramadhan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "194": {
+        "uid": 194,
+        "user_id": "80",
+        "name": "Bayu Putra",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "195": {
+        "uid": 195,
+        "user_id": "81",
+        "name": "Muhamad Ihwan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "196": {
+        "uid": 196,
+        "user_id": "82",
+        "name": "Ainun Hurrotaini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "197": {
+        "uid": 197,
+        "user_id": "83",
+        "name": "Aisyah Ani Rosita",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "198": {
+        "uid": 198,
+        "user_id": "84",
+        "name": "Zulaihah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "199": {
+        "uid": 199,
+        "user_id": "85",
+        "name": "Rima Rahmayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "200": {
+        "uid": 200,
+        "user_id": "86",
+        "name": "Sukma Abdul Rozy",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "201": {
+        "uid": 201,
+        "user_id": "87",
+        "name": "Muhammad Abid Abdillah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "202": {
+        "uid": 202,
+        "user_id": "88",
+        "name": "Iqbal Mubhij",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "203": {
+        "uid": 203,
+        "user_id": "89",
+        "name": "Muhammad Wildan Makhasin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "204": {
+        "uid": 204,
+        "user_id": "90",
+        "name": "Nurul Akhyar",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "205": {
+        "uid": 205,
+        "user_id": "91",
+        "name": "Mohamad Fauzi Setiawan",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "206": {
+        "uid": 206,
+        "user_id": "92",
+        "name": "Wiratania",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "207": {
+        "uid": 207,
+        "user_id": "93",
+        "name": "Rr. Nur Apriyanti Atika",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "208": {
+        "uid": 208,
+        "user_id": "94",
+        "name": "Shofiyatul Mardiyah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "209": {
+        "uid": 209,
+        "user_id": "95",
+        "name": "Azzahro Maulidiah",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "210": {
+        "uid": 210,
+        "user_id": "96",
+        "name": "Sukmawati Megawijayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "211": {
+        "uid": 211,
+        "user_id": "97",
+        "name": "Tursina Ainun Nisa",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "212": {
+        "uid": 212,
+        "user_id": "98",
+        "name": "Selviya Anggraini",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "213": {
+        "uid": 213,
+        "user_id": "99",
+        "name": "Yossy Diko Pratamayuda",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "214": {
+        "uid": 214,
+        "user_id": "136",
+        "name": "Ahmad Shobirin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "215": {
+        "uid": 215,
+        "user_id": "133",
+        "name": "Ika Wijayanti",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "216": {
+        "uid": 216,
+        "user_id": "102",
+        "name": "Ahmad Shobirin",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "217": {
+        "uid": 217,
+        "user_id": "202",
+        "name": "Iqbal Mubhij",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "218": {
+        "uid": 218,
+        "user_id": "113",
+        "name": "Nur Reza Pratiwi",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    },
+    "219": {
+        "uid": 219,
+        "user_id": "213",
+        "name": "Yossy Diko Pratamayuda",
+        "role": 0,
+        "password": "",
+        "card_no": "0000000000 ",
+        "device_ip": "10.10.2.223"
+    }
+}

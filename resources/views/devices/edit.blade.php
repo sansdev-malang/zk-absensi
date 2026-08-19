@@ -41,6 +41,12 @@
                             <input type="text" name="nomor_mesin" id="nomor_mesin" value="{{ old('nomor_mesin', $device->nomor_mesin) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         </div>
 
+                        <!-- Tipe Mesin -->
+                        <div>
+                            <label for="tipe_mesin" class="block text-sm font-medium text-gray-700 mb-1">Tipe Mesin (Opsional)</label>
+                            <input type="text" name="tipe_mesin" id="tipe_mesin" value="{{ old('tipe_mesin', $device->tipe_mesin) }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Misal: K40, LX50, dsj.">
+                        </div>
+
                         <!-- IP Address -->
                         <div>
                             <label for="ip_address" class="block text-sm font-medium text-gray-700 mb-1">IP Address <span class="text-red-500">*</span></label>
@@ -51,6 +57,12 @@
                         <div>
                             <label for="port" class="block text-sm font-medium text-gray-700 mb-1">Port <span class="text-red-500">*</span></label>
                             <input type="number" name="port" id="port" value="{{ old('port', $device->port) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+
+                        <!-- Lokasi / Area -->
+                        <div>
+                            <label for="lokasi" class="block text-sm font-medium text-gray-700 mb-1">Lokasi/Area (Opsional)</label>
+                            <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi', $device->lokasi) }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Misal: Lobby, Pintu Belakang, Lt 2">
                         </div>
 
                         <!-- Comm Key -->

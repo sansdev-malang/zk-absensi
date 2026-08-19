@@ -69,6 +69,14 @@
                             </button>
                         </form>
                         @endif
+                        <button onclick="document.getElementById('importModal').classList.remove('hidden')" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition inline-flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                            Import Excel
+                        </button>
+                        <a href="{{ route('users.export', request()->all()) }}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition inline-flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Export Excel
+                        </a>
                         <a href="{{ route('users.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition inline-flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
                             Tambah Manual
@@ -208,7 +216,46 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span class="text-gray-700 font-medium">Memproses data dari mesin...</span>
+            <span class="text-gray-700 font-medium">Memproses data...</span>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl transform transition-all">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-900">Import Data Karyawan</h3>
+                <button onclick="document.getElementById('importModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+                @csrf
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">File Excel (.xlsx, .xls, .csv)</label>
+                    <input type="file" name="file" accept=".xlsx,.xls,.csv" required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-gray-200 rounded-xl">
+                </div>
+                <div class="bg-blue-50 text-blue-800 text-xs p-3 rounded-xl mb-4 border border-blue-100">
+                    <p class="font-bold mb-1">Format Header Excel yang didukung:</p>
+                    <p>uid, name, email, password, jabatan, role</p>
+                    <ul class="list-disc list-inside mt-1 space-y-1 text-blue-700">
+                        <li><strong>name</strong>: Wajib diisi</li>
+                        <li><strong>uid</strong>: Opsional, untuk mapping mesin</li>
+                        <li><strong>email</strong>: Jika kosong akan di-generate otomatis</li>
+                        <li><strong>password</strong>: Jika kosong default "password123"</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="{{ route('users.template') }}" class="inline-flex items-center gap-1.5 text-blue-800 font-medium hover:text-blue-900 underline decoration-blue-300 hover:decoration-blue-800 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Download Contoh Format Excel (.xlsx)
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" onclick="document.getElementById('importModal').classList.add('hidden')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-xl font-medium transition">Batal</button>
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl font-medium shadow-sm transition">Upload & Import</button>
+                </div>
+            </form>
         </div>
     </div>
 

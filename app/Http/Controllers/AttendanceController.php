@@ -9,8 +9,10 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Attendance::with(['user', 'device'])
-            ->selectRaw('DATE(waktu) as tanggal, user_id, MIN(waktu) as jam_masuk, MAX(waktu) as jam_pulang, MAX(device_id) as device_id');
+        $query = Attendance::with(['user'])
+            ->selectRaw("DATE(waktu) as tanggal, user_id, MIN(waktu) as jam_masuk, MAX(waktu) as jam_pulang, 
+                         SUBSTRING_INDEX(GROUP_CONCAT(COALESCE(device_id, 0) ORDER BY waktu ASC), ',', 1) as masuk_device_id,
+                         SUBSTRING_INDEX(GROUP_CONCAT(COALESCE(device_id, 0) ORDER BY waktu DESC), ',', 1) as pulang_device_id");
 
         if ($request->filled('start_date')) {
             $query->whereDate('waktu', '>=', $request->start_date);
@@ -33,8 +35,35 @@ class AttendanceController extends Controller
             ->orderBy('user_id', 'asc')
             ->paginate(50)
             ->appends($request->all());
+
+        $devices = \App\Models\Device::pluck('nama_mesin', 'id');
             
-        return view('attendances.index', compact('attendances'));
+        return view('attendances.index', compact('attendances', 'devices'));
+    }
+
+    public function log(Request $request)
+    {
+        $query = Attendance::with(['user', 'device'])->latest('waktu');
+        
+        if ($request->filled('start_date')) {
+            $query->whereDate('waktu', '>=', $request->start_date);
+        }
+        
+        if ($request->filled('end_date')) {
+            $query->whereDate('waktu', '<=', $request->end_date);
+        }
+        
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->whereHas('user', function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('uid', 'like', "%{$search}%");
+            });
+        }
+
+        $logs = $query->paginate(50)->appends($request->all());
+        
+        return view('attendances.log', compact('logs'));
     }
 
     public function create()

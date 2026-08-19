@@ -39,6 +39,12 @@
                             <label for="nomor_mesin" class="block text-sm font-medium text-gray-700 mb-1">Nomor Mesin / Device ID <span class="text-red-500">*</span></label>
                             <input type="text" name="nomor_mesin" id="nomor_mesin" value="{{ old('nomor_mesin', '1') }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Biasanya 1">
                         </div>
+                        
+                        <!-- Tipe Mesin -->
+                        <div>
+                            <label for="tipe_mesin" class="block text-sm font-medium text-gray-700 mb-1">Tipe Mesin (Opsional)</label>
+                            <input type="text" name="tipe_mesin" id="tipe_mesin" value="{{ old('tipe_mesin') }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Misal: K40, LX50, dsj.">
+                        </div>
 
                         <!-- IP Address -->
                         <div>
@@ -50,6 +56,12 @@
                         <div>
                             <label for="port" class="block text-sm font-medium text-gray-700 mb-1">Port <span class="text-red-500">*</span></label>
                             <input type="number" name="port" id="port" value="{{ old('port', 4370) }}" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+
+                        <!-- Lokasi / Area -->
+                        <div>
+                            <label for="lokasi" class="block text-sm font-medium text-gray-700 mb-1">Lokasi/Area (Opsional)</label>
+                            <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi') }}" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Misal: Lobby, Pintu Belakang, Lt 2">
                         </div>
 
                         <!-- Comm Key -->

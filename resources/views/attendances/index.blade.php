@@ -113,7 +113,6 @@
                                 <th class="px-6 py-4 font-medium">UID</th>
                                 <th class="px-6 py-4 font-medium">Jam Check In</th>
                                 <th class="px-6 py-4 font-medium">Jam Check Out</th>
-                                <th class="px-6 py-4 font-medium">Nama Mesin</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
@@ -129,25 +128,47 @@
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         {{ $log->user->uid ?? '-' }}
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">
-                                        {{ \Carbon\Carbon::parse($log->jam_masuk)->format('H:i') }}
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm text-gray-900 font-medium">{{ \Carbon\Carbon::parse($log->jam_masuk)->format('H:i') }}</div>
+                                        <div class="mt-1">
+                                            @if($log->masuk_device_id != '0' && isset($devices[$log->masuk_device_id]))
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-700">
+                                                    {{ $devices[$log->masuk_device_id] }}
+                                                </span>
+                                            @else
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                                                    Input Manual
+                                                </span>
+                                            @endif
+                                        </div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">
-                                        @if($log->jam_masuk != $log->jam_pulang)
-                                            {{ \Carbon\Carbon::parse($log->jam_pulang)->format('H:i') }}
+                                    <td class="px-6 py-4">
+                                        @php
+                                            $jamMasuk = \Carbon\Carbon::parse($log->jam_masuk);
+                                            $jamPulang = \Carbon\Carbon::parse($log->jam_pulang);
+                                            $diffMinutes = $jamMasuk->diffInMinutes($jamPulang);
+                                        @endphp
+                                        @if($log->jam_masuk != $log->jam_pulang && $diffMinutes > 30)
+                                            <div class="text-sm text-gray-900 font-medium">{{ $jamPulang->format('H:i') }}</div>
+                                            <div class="mt-1">
+                                                @if($log->pulang_device_id != '0' && isset($devices[$log->pulang_device_id]))
+                                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-700">
+                                                        {{ $devices[$log->pulang_device_id] }}
+                                                    </span>
+                                                @else
+                                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                                                        Input Manual
+                                                    </span>
+                                                @endif
+                                            </div>
                                         @else
                                             <span class="text-gray-400">-</span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium {{ $log->device ? 'bg-gray-100 text-gray-700' : 'bg-blue-100 text-blue-700' }}">
-                                            {{ $log->device->nama_mesin ?? 'Input Manual' }}
-                                        </span>
-                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                                    <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                                         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4">
                                             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                         </div>

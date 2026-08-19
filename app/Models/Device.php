@@ -9,8 +9,10 @@ class Device extends Model
     protected $fillable = [
         'nama_mesin',
         'nomor_mesin',
+        'tipe_mesin',
         'ip_address',
         'port',
+        'lokasi',
         'comm_key',
         'firmware',
         'kapasitas',

@@ -46,8 +46,10 @@ class DeviceController extends Controller
         $validated = $request->validate([
             'nama_mesin' => 'required|string|max:255',
             'nomor_mesin' => 'required|string|max:255',
+            'tipe_mesin' => 'nullable|string|max:255',
             'ip_address' => 'required|ip',
             'port' => 'required|integer',
+            'lokasi' => 'nullable|string|max:255',
             'comm_key' => 'nullable|string',
             'status' => 'boolean',
         ]);
@@ -67,8 +69,10 @@ class DeviceController extends Controller
         $validated = $request->validate([
             'nama_mesin' => 'required|string|max:255',
             'nomor_mesin' => 'required|string|max:255',
+            'tipe_mesin' => 'nullable|string|max:255',
             'ip_address' => 'required|ip',
             'port' => 'required|integer',
+            'lokasi' => 'nullable|string|max:255',
             'comm_key' => 'nullable|string',
             'status' => 'boolean',
         ]);
@@ -99,6 +103,37 @@ class DeviceController extends Controller
             return redirect()->route('devices.index')->with('success', "Seluruh log absensi di mesin {$device->nama_mesin} berhasil dibersihkan (Kosong).");
         } else {
             return redirect()->route('devices.index')->with('error', "Gagal membersihkan log di mesin {$device->nama_mesin}. Pastikan mesin dalam keadaan aktif dan terhubung.");
+        }
+    }
+
+    public function testConnection(Device $device)
+    {
+        $isOnline = false;
+        $syncMessage = "";
+
+        // Mode 1: Cek dari last_sync_at (Cloud-friendly / Local-Sync)
+        if ($device->last_sync_at && $device->last_sync_at->diffInMinutes(now()) <= 15) {
+            $isOnline = true;
+            $syncMessage = " via Local-Sync (Terakhir aktif: " . $device->last_sync_at->diffForHumans() . ")";
+        } else {
+            // Mode 2: Fallback ke Ping langsung (Local-friendly)
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                exec("ping -n 1 -w 1000 " . escapeshellarg($device->ip_address), $output, $status);
+            } else {
+                exec("ping -c 1 -W 1 " . escapeshellarg($device->ip_address), $output, $status);
+            }
+            
+            if ($status === 0) {
+                $isOnline = true;
+                $syncMessage = " via Ping Langsung";
+            }
+        }
+
+        if ($isOnline) {
+            return redirect()->route('devices.index')->with('success', "Koneksi ke mesin {$device->nama_mesin} BERHASIL{$syncMessage}.");
+        } else {
+            $lastSeen = $device->last_sync_at ? $device->last_sync_at->diffForHumans() : 'Belum pernah';
+            return redirect()->route('devices.index')->with('error', "Koneksi ke mesin {$device->nama_mesin} GAGAL. Ping tidak merespons dan Local-Sync terakhir aktif: {$lastSeen}.");
         }
     }
 }
